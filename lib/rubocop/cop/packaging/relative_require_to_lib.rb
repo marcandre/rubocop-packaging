@@ -27,7 +27,7 @@ module RuboCop # :nodoc:
         # TODO: document it.
         def on_send(node)
           return unless require_relative(node)
-
+          p 'adding offense', node
           add_offense(node)
         end
 
@@ -37,6 +37,7 @@ module RuboCop # :nodoc:
           root_dir = RuboCop::ConfigLoader.project_root
           relative_dir = File.expand_path(str, @file_directory)
           relative_dir.delete_prefix!(root_dir + '/')
+          p root_dir, relative_dir
           relative_dir.start_with?('lib')
           # str.match?(%r{.*\./lib/})
         end
